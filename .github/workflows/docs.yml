@@ -16,7 +16,7 @@ env:
 jobs:
   docs:
     runs-on: ubuntu-latest
-    if: github.repository == 'kubevirt/kubevirt.core'
+    if: github.repository == '0xFelix/kubevirt.core'
     permissions:
       actions: write
       checks: write
@@ -54,7 +54,7 @@ jobs:
         uses: ansible-middleware/collection-docs-action@main
         with:
           collection_fqcn: kubevirt.core
-          collection_repo: kubevirt/kubevirt.core
+          collection_repo: 0xFelix/kubevirt.core
           dependencies: false
           commit_changelog: false
           commit_ghpages: true
@@ -64,3 +64,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           bot_email: kubevirtbot@redhat.com
           bot_account: kubevirt-bot
+
+      - name: Run extra-docs-linting workflow
+        run: |
+          cd ${GITHUB_WORKSPACE}/ansible_collections/kubevirt/core
+          gh workflow run extra-docs-linting.yml
+        env:
+          GITHUB_TOKEN: ${{ github.token }}

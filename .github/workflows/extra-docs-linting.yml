@@ -1,6 +1,7 @@
 name: Lint extra docsite docs and links
 on:
   # Run CI against all pushes (direct commits, also merged PRs), Pull Requests
+  workflow_dispatch:
   push:
     branches:
       - main
