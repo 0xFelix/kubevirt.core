@@ -1,0 +1,19 @@
+---
+- name: Delete VMs
+  connection: local
+  gather_facts: false
+  hosts: localhost
+  tasks:
+    - name: Delete a VM
+      kubevirt.core.kubevirt_vm:
+        state: absent
+        name: testvm1
+        namespace: default
+        wait: true
+
+    - name: Delete another VM
+      kubevirt.core.kubevirt_vm:
+        state: absent
+        name: testvm2
+        namespace: default
+        wait: true
